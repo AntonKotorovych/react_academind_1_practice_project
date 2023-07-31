@@ -2,8 +2,17 @@ import React from 'react';
 import styles from './Form.module.css';
 
 const Form = props => {
+  const submitHandler = event => {
+    event.preventDefault();
+    console.log('Submitting of form');
+  };
+
+  const resetHandler = event => {
+    console.log('Resseting of form');
+  };
+
   return (
-    <form className={styles.form}>
+    <form onSubmit={submitHandler} className={styles.form}>
       <div className={styles[`input-group`]}>
         <p>
           <label htmlFor='current-savings'>Current Savings ($)</label>
@@ -27,7 +36,11 @@ const Form = props => {
         </p>
       </div>
       <p className={styles.actions}>
-        <button type='reset' className={styles.buttonAlt}>
+        <button
+          type='reset'
+          onClick={resetHandler}
+          className={styles.buttonAlt}
+        >
           Reset
         </button>
         <button type='submit' className={styles.button}>
