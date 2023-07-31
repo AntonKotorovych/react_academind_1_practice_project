@@ -1,14 +1,76 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Form.module.css';
 
 const Form = props => {
+  // Handling Data from Inputs
+
+  const [curSavings, setCurSavings] = useState('');
+  const [yearlySavings, setYearlySavings] = useState('');
+  const [expectedInterest, setExpectedInterest] = useState('');
+  const [investmentDuration, setInvestmentDuration] = useState('');
+
+  const [inputData, setInputData] = useState({
+    curSavings: '',
+    yearlySavings: '',
+    expectedInterest: '',
+    investmentDuration: '',
+  });
+
+  const curSavingsHandler = event => {
+    setCurSavings(event.target.value);
+    // console.log(event.target.value);
+  };
+
+  const yearlySavingsHandler = event => {
+    setYearlySavings(event.target.value);
+    // console.log(event.target.value);
+  };
+
+  const expectedInterestHandler = event => {
+    setExpectedInterest(event.target.value);
+    // console.log(event.target.value);
+  };
+
+  const investmentDurationHandler = event => {
+    setInvestmentDuration(event.target.value);
+    // console.log(event.target.value);
+  };
+  // console.log(curSavings, yearlySavings, expectedInterest, investmentDuration);
+  // Submit and reset buttons handlers
+
   const submitHandler = event => {
-    event.preventDefault();
-    console.log('Submitting of form');
+    if (
+      curSavings &&
+      yearlySavings &&
+      expectedInterest &&
+      investmentDuration > 0
+    ) {
+      event.preventDefault();
+      setInputData({
+        curSavings: curSavings,
+        yearlySavings: yearlySavings,
+        expectedInterest: expectedInterest,
+        investmentDuration: investmentDuration,
+      });
+    } else {
+      event.preventDefault();
+
+      console.log(`error, you've filled wrong information`);
+    }
   };
 
   const resetHandler = event => {
-    console.log('Resseting of form');
+    setCurSavings('');
+    setYearlySavings('');
+    setExpectedInterest('');
+    setInvestmentDuration('');
+    setInputData({
+      curSavings: '',
+      yearlySavings: '',
+      expectedInterest: '',
+      investmentDuration: '',
+    });
+    console.log('reset form');
   };
 
   return (
@@ -16,11 +78,19 @@ const Form = props => {
       <div className={styles[`input-group`]}>
         <p>
           <label htmlFor='current-savings'>Current Savings ($)</label>
-          <input type='number' id='current-savings' />
+          <input
+            type='number'
+            onChange={curSavingsHandler}
+            id='current-savings'
+          />
         </p>
         <p>
           <label htmlFor='yearly-contribution'>Yearly Savings ($)</label>
-          <input type='number' id='yearly-contribution' />
+          <input
+            type='number'
+            onChange={yearlySavingsHandler}
+            id='yearly-contribution'
+          />
         </p>
       </div>
       <div className={styles[`input-group`]}>
@@ -28,11 +98,19 @@ const Form = props => {
           <label htmlFor='expected-return'>
             Expected Interest (%, per year)
           </label>
-          <input type='number' id='expected-return' />
+          <input
+            type='number'
+            onChange={expectedInterestHandler}
+            id='expected-return'
+          />
         </p>
         <p>
           <label htmlFor='duration'>Investment Duration (years)</label>
-          <input type='number' id='duration' />
+          <input
+            type='number'
+            onChange={investmentDurationHandler}
+            id='duration'
+          />
         </p>
       </div>
       <p className={styles.actions}>
