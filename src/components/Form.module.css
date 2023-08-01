@@ -63,3 +63,10 @@ button:hover {
   background: transparent;
   color: #91e1d0;
 }
+
+/* rendering error borders on input fields */
+
+.input-invalid {
+  background-color: rgb(247, 140, 140);
+  border-color: red;
+}

@@ -54,8 +54,7 @@ const Form = props => {
       });
     } else {
       event.preventDefault();
-
-      console.log(`error, you've filled wrong information`);
+      resetHandler();
     }
   };
 
@@ -70,9 +69,9 @@ const Form = props => {
       expectedInterest: '',
       investmentDuration: '',
     });
-    console.log('reset form');
   };
 
+  props.onCalculate(inputData);
   return (
     <form onSubmit={submitHandler} className={styles.form}>
       <div className={styles[`input-group`]}>
